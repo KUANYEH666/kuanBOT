@@ -1,0 +1,84 @@
+import discord 
+from discord.ext import commands
+from core.classes import Cog_Extension
+import json
+
+with open('setting.json', mode='r', encoding='utf8') as jfile:
+   jdata = json.load(jfile)
+
+class event(Cog_Extension):
+    @commands.Cog.listener()
+    async def on_member_join(self,member):
+        channel = self.bot.get_channel(int(jdata['WELCOME']))
+        embed=discord.Embed(title=f'**{member}** 加入!', url="https://cdn.discordapp.com/attachments/846756328520155206/974632470794342420/FB_IMG_1652318148320.jpg", description="進入請看規則喔", color=0x49e01f)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/846756328520155206/974632470794342420/FB_IMG_1652318148320.jpg")
+        await channel.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_member_remove(self,member):
+        channel = self.bot.get_channel(int(jdata['WELCOME']))
+        embed=discord.Embed(title=f'{member} 離開!', url="https://cdn.discordapp.com/attachments/915252108507365386/974926085466779688/not_megumin_543330203_p_2836582481815224056_1_p_2836582481815224056.webp", description="後會有期", color=0xf10914)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/915252108507365386/974926085466779688/not_megumin_543330203_p_2836582481815224056_1_p_2836582481815224056.webp")
+        await channel.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message(self,msg):
+        if msg.content =='早上好':
+            await msg.channel.send('中國')
+            await msg.channel.send('現在我有冰淇淋')
+        if msg.content =='我好孤單':
+            await msg.channel.send('不管你需不需要，我一直都在。')
+        if msg.content =='搞笑影片':
+            await msg.channel.send('||https://www.youtube.com/watch?v=BjDebmqFRuc&list=LL&index=64&ab_channel=MrMeme||')
+        if msg.content=='晚安':
+            await msg.channel.send('晚安~')
+        if msg.content =='阿寬':
+            await msg.channel.send('@579231390449795093')
+        if msg.content =='我太難了':
+            await msg.channel.send('拍拍')
+        if msg.content =='鄧福如':
+            await msg.channel.send('叉子勒')
+        if msg.content =='一路發':
+            await msg.channel.send('Q~~~~~~')
+        if msg.content =='隔離7天':
+            await msg.channel.send('168小時')
+        if msg.content =='昨天早上吃完早餐':
+            await msg.channel.send('突然好想吃芭樂')
+        elif msg.content == '寬':
+            await msg.channel.send('<@579231390449795093>')
+        elif msg.content == '大會報告':
+            await msg.channel.send('@everyone')
+        elif msg.content == '打瓦':
+            await msg.channel.send('<@&975574886078619738>')
+        elif msg.content == '打apex':
+            await msg.channel.send('<@&975581060412882965>')
+    
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        #https://youtu.be/ojSb06_jm9Y?list=PLSCgthA1Anif1w6mKM3O6xlBGGypXtrtN&t=2727
+        if hasattr(ctx.command,'on_error'):
+            return
+
+        if isinstance(error,commands.errors.MissingRequiredArgument):
+            embed=discord.Embed(title="↓↓↓↓↓↓")
+            embed.set_author(name="🛑錯誤指令🛑")
+            embed.add_field(name="請輸入正確參數", value="查詢指令k! helpp", inline=False)
+            await ctx.send(embed=embed)
+        elif isinstance(error, commands.errors.CommandNotFound):
+            embed=discord.Embed(title="↓↓↓↓↓↓")
+            embed.set_author(name="🛑錯誤指令🛑")
+            embed.add_field(name="請輸入正確指令", value="查詢指令k! helpp", inline=False)
+            await ctx.send(embed=embed)
+        else:
+            embed=discord.Embed(title="↓↓↓↓↓↓")
+            embed.set_author(name="🛑錯誤指令🛑")
+            embed.add_field(name="請輸入正確指令", value="查詢指令k! helpp", inline=False)
+            await ctx.send(embed=embed)
+
+  
+
+        
+        
+def setup(bot):
+    bot.add_cog(event(bot)) 
