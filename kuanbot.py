@@ -33,20 +33,19 @@ async def unload(ctx, extension):
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/915252108507365386/975385518139379792/b7556a97bb97949ba011e9ea48241acb.jpg")
     await ctx.send(embed=embed)
 
-
 @bot.command()
-async def reload(ctx,extension):
+async def reload(ctx, extension):
     bot.reload_extension(f'cmds.{extension}')
-    embed=discord.Embed(title="通知", description=f"{extension}資料夾成功重新載入", color=0x4cad0b)
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/846756328520155206/974964515852681216/1b03aa125b2f36f11cb4fd9f402c5faf.jpg")
+    embed=discord.Embed(title="通知", description=f"**{extension}**資料夾重新讀取", color=0x4cad0b)
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/915252108507365386/975385518139379792/b7556a97bb97949ba011e9ea48241acb.jpg")
     await ctx.send(embed=embed)
-
 
 
 
 for filename in os.listdir('./cmds'):
     if filename.endswith('.py'):
         bot.load_extension(f'cmds.{filename[:-3]}')
+
 
 
 

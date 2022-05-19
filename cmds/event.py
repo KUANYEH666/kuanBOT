@@ -26,6 +26,8 @@ class event(Cog_Extension):
         if msg.content =='早上好':
             await msg.channel.send('中國')
             await msg.channel.send('現在我有冰淇淋')
+        if msg.content =='晚上好':
+            await msg.channel.send('嗨~ 消夜吃了嗎')
         if msg.content =='我好孤單':
             await msg.channel.send('不管你需不需要，我一直都在。')
         if msg.content =='搞笑影片':
@@ -52,7 +54,28 @@ class event(Cog_Extension):
             await msg.channel.send('<@&975574886078619738>')
         elif msg.content == '打apex':
             await msg.channel.send('<@&975581060412882965>')
-    
+        elif msg.content == '上課了':
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+        if msg.content =='電子學實習電路網址':
+            await msg.channel.send('http://www.falstad.com/circuit/circuitjs.html')
+        elif msg.content == '傑克':
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+            await msg.channel.send('<@696170463302254663>')
+        if msg.content =='體育網址':
+            await msg.channel.send(' https://drive.google.com/drive/folders/1eJM_eHsSECtu6bCRC0FJfSdd4ZHvNG5V')
+           
+        
+        
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
