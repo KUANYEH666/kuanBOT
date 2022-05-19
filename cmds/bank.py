@@ -9,8 +9,11 @@ async def update_bank(user, change = 0, mode = "wallet"):
     pass
     users = await get_bank_data()
     users[str(user.id)][mode] += change
+    with open("bank.json", "w") as f:
+            json.dump(users, f)
     money = [users[str(user.id)]["wallet"], users[str(user.id)]["bank"]]    
     return money
+   
 
 
 async def open_account(user):
@@ -74,6 +77,7 @@ class bank(Cog_Extension):
             price = item["price"]
             embed.add_field(name = name, value = f"${price}")
         await ctx.send(embed=embed)
+
     @commands.command()
     async def beg(self, ctx):
         pass
@@ -86,7 +90,8 @@ class bank(Cog_Extension):
         users[str(user.id)]["wallet"] += earnings
         with open("bank.json", "w") as f:
             json.dump(users, f)
-
+        money = [users[str(user.id)]["wallet"], users[str(user.id)]["bank"]]    
+        return money
         
         
         
@@ -134,6 +139,9 @@ class bank(Cog_Extension):
             asyncio.sleep(3)
             await ctx.send(str(final))
             await ctx.send(f"你輸了 {pos} 塊錢")
+       
+        
+        
 
     @commands.command()
     async def bank_out(self, ctx, amount = None):   
