@@ -136,21 +136,60 @@ class bank(Cog_Extension):
             await ctx.send(f"你輸了 {pos} 塊錢")
 
     @commands.command()
-    async def bank_in(self, ctx, amount = None):   
+    async def bank_out(self, ctx, amount = None):   
         pass
         await open_account(ctx.author)
         if amount == None:
             await ctx.send("請輸入數字")
             return 
+        bal = await update_bank(ctx.author)
+        amount = int(amount)
+   
+        if amount > bal[1]:
+            await ctx.send("你沒這麼多錢拉幹")
+            return 
+        if amount > 200:
+            await ctx.send("要小於200喔")
+            return
+        if amount< 0:
+            await ctx.send("北七喔，錢有負的喔")
+            return
+
+        await update_bank(ctx.author, amount)
+        await update_bank(ctx.author, -1*amount, "bank")
+        await ctx.send(f"你提款了 { amount } 塊錢!!!")
     async def update_bank(user, change = 0, mode = "wallet"):
         pass
         users = await get_bank_data()
         users[str(user.id)][mode] += change
-        with open("bank.json", "w") as f:
-            json.dump(users, f)
-        bal = [users[str(user.id)]["wallet"], users[str(user.id)]["bank"]]    
-        return bal
-        
+    
+    @commands.command()
+    async def bank_in(ctx, amount = None):
+        pass
+        await open_account(ctx.author)
+        if amount == None:
+            await ctx.send("請輸入數字")
+            return 
+        bal = await update_bank(ctx.author)
+        amount = int(amount)
+   
+        if amount > bal[1]:
+            await ctx.send("你沒這麼多錢拉幹")
+            return 
+        if amount > 200:
+            await ctx.send("要小於200喔")
+            return
+        if amount< 0:
+            await ctx.send("北七喔，錢有負的喔")
+            return
+
+        await update_bank(ctx.author, -1 * amount)
+        await update_bank(ctx.author, amount, "bank")
+        await ctx.send(f"你存款了 { amount } 塊錢!")
+    async def update_bank(user, change = 0, mode = "wallet"):
+        pass
+        users = await get_bank_data()
+        users[str(user.id)][mode] += change
 
 
 
