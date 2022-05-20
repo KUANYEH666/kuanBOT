@@ -13,6 +13,10 @@ async def update_bank(user, change = 0, mode = "wallet"):
             json.dump(users, f)
     money = [users[str(user.id)]["wallet"], users[str(user.id)]["bank"]]    
     return money
+
+async def guess(self, ctx, ante):
+    pass
+    HM = [2.8, 2.3, 1.9, 1.5, 1.1]
    
 
 
@@ -59,7 +63,7 @@ class bank(Cog_Extension):
         wallet = users[str(user.id)]["wallet"]
         bank = users[str(user.id)]["bank"]
 
-        embed=discord.Embed(title="成員", description=f"{ctx.author.name}", color=0x5fecea)
+        embed=discord.Embed(title="成員", description=f"@{ctx.author.name}", color=0x5fecea)
         embed.set_thumbnail(url = user.avatar_url)
         embed.set_author(name="財產")
         embed.add_field(name="錢包",value = wallet,inline=False)
@@ -78,20 +82,7 @@ class bank(Cog_Extension):
             embed.add_field(name = name, value = f"${price}")
         await ctx.send(embed=embed)
 
-    @commands.command()
-    async def beg(self, ctx):
-        pass
-        await open_account(ctx.author)
-    
-        users = await get_bank_data()
-        user = ctx.author
-        earnings = random.randrange(101)
-        await ctx.send(f"某人給了你 {earnings} 塊錢!!")
-        users[str(user.id)]["wallet"] += earnings
-        with open("bank.json", "w") as f:
-            json.dump(users, f)
-        money = [users[str(user.id)]["wallet"], users[str(user.id)]["bank"]]    
-        return money
+   
         
         
         
@@ -156,9 +147,7 @@ class bank(Cog_Extension):
         if amount > bal[1]:
             await ctx.send("你沒這麼多錢拉幹")
             return 
-        if amount > 200:
-            await ctx.send("要小於200喔")
-            return
+       
         if amount< 0:
             await ctx.send("北七喔，錢有負的喔")
             return
@@ -172,7 +161,7 @@ class bank(Cog_Extension):
         users[str(user.id)][mode] += change
     
     @commands.command()
-    async def bank_in(ctx, amount = None):
+    async def bank_in(self,ctx, amount = None):
         pass
         await open_account(ctx.author)
         if amount == None:
@@ -181,12 +170,10 @@ class bank(Cog_Extension):
         bal = await update_bank(ctx.author)
         amount = int(amount)
    
-        if amount > bal[1]:
+        if amount > bal[0]:
             await ctx.send("你沒這麼多錢拉幹")
             return 
-        if amount > 200:
-            await ctx.send("要小於200喔")
-            return
+       
         if amount< 0:
             await ctx.send("北七喔，錢有負的喔")
             return
@@ -198,6 +185,29 @@ class bank(Cog_Extension):
         pass
         users = await get_bank_data()
         users[str(user.id)][mode] += change
+    
+    
+
+    @commands.command()
+    async def LP(ctx, member:discord.Member, amount = None):
+        await open_account(ctx.author)
+        await open_account(member)
+        member = ctx.author
+        member = await get_bank_data()
+        wallet = member[str(member.id)]["wallet"]
+        bank = member[str(member.id)]["bank"]
+
+        embed=discord.Embed(title="成員", description=f"@{ctx.author.name}", color=0x5fecea)
+        embed.set_thumbnail(url = member.avatar_url)
+        embed.set_author(name="財產")
+        embed.add_field(name="錢包",value = wallet,inline=False)
+        embed.add_field(name="銀行",value = bank,inline=True)
+        await ctx.send(embed=embed)
+
+
+    
+              
+    
 
 
 
