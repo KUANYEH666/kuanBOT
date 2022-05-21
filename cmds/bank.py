@@ -1,3 +1,4 @@
+from tkinter.tix import Balloon
 import discord
 import random
 from discord.ext import commands
@@ -189,15 +190,15 @@ class bank(Cog_Extension):
     
 
     @commands.command()
-    async def LP(ctx, member:discord.Member, amount = None):
+    async def LP(self,ctx):
         await open_account(ctx.author)
         await open_account(member)
-        member = ctx.author
+        member = ctx.author.mention
         member = await get_bank_data()
         wallet = member[str(member.id)]["wallet"]
         bank = member[str(member.id)]["bank"]
 
-        embed=discord.Embed(title="成員", description=f"@{ctx.author.name}", color=0x5fecea)
+        embed=discord.Embed(title="成員", description=f"{ctx.author.mention.name}", color=0x5fecea)
         embed.set_thumbnail(url = member.avatar_url)
         embed.set_author(name="財產")
         embed.add_field(name="錢包",value = wallet,inline=False)
@@ -205,25 +206,32 @@ class bank(Cog_Extension):
         await ctx.send(embed=embed)
 
 
-    
-              
-    
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    @commands.command()
+    async def send(ctx, member:discord.Member, amount = None):
+        await open_account(ctx.author)
+        await open_account(member)
+        if amount == None:
+            await ctx.send("請輸入數字")
+            return 
+        bal = await update_bank(ctx.author)
+        if amount == "all":
+            amount = bal[0]
+            amount = int(amount)
+        if amount > bal[1]:
+            await ctx.send("你沒這麼多錢拉幹")
+            return 
+        if amount< 0:
+            await ctx.send("北七喔，錢有負的喔")
+            return
+        await update_bank(ctx.author, -1 * amount, "bank")
+        await update_bank(member, amount, "bank")
+        member = str(member)
+        member = member.split("#")[0]
+        await ctx.send(f"你給了{ member } { amount } 塊錢!!!")
 
 
 

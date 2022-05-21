@@ -46,11 +46,9 @@ class guess(Cog_Extension):
 
             if guess == number : 
                 await ctx.send("猜對了")
-
-            if guess == 'mybad':
-                await ctx.send("你輸了")
                
                 break
+        await ctx.send('10次機會已經用完了,請再次挑戰')
 
                     
 def setup(bot):
