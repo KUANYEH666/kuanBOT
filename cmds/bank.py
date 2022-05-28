@@ -1,10 +1,14 @@
+from contextlib import redirect_stderr
+from re import M, S
 from tkinter.tix import Balloon
+from attr import s
 import discord
 import random
 from discord.ext import commands
 from core.classes import Cog_Extension
 import json
 import asyncio
+from discord.ext.commands import cooldown, BucketType
 
 async def update_bank(user, change = 0, mode = "wallet"):
     pass
@@ -90,7 +94,7 @@ class bank(Cog_Extension):
     @commands.command()
     async def slots(self, ctx, amount = None, mang = None):
         pass
-    
+        
         await open_account(ctx.author)
         if mang == None:
             await ctx.send("請輸入倍率")
@@ -211,16 +215,17 @@ class bank(Cog_Extension):
 
 
     @commands.command()
-    async def send(ctx, member:discord.Member, amount = None):
+    async def send(self, ctx, member:discord.Member, amount = None):
         await open_account(ctx.author)
         await open_account(member)
         if amount == None:
-            await ctx.send("請輸入數字")
+            await ctx.send("請輸入要給的金額")
             return 
         bal = await update_bank(ctx.author)
+
         if amount == "all":
             amount = bal[0]
-            amount = int(amount)
+        amount = int(amount)
         if amount > bal[1]:
             await ctx.send("你沒這麼多錢拉幹")
             return 
@@ -231,7 +236,40 @@ class bank(Cog_Extension):
         await update_bank(member, amount, "bank")
         member = str(member)
         member = member.split("#")[0]
-        await ctx.send(f"你給了{ member } { amount } 塊錢!!!")
+        await ctx.send(f'你給了{member} { amount } 塊錢!!!')
+
+    # @commands.command()
+    # async def fk(self, ctx, member:discord.Member, amount = None):
+    #     await open_account(ctx.author)
+    #     await open_account(member)
+    #     if amount == None:
+    #         await ctx.send("請輸入要給的金額")
+    #         return 
+    #     bal = await update_bank(ctx.author)
+        
+    #     if amount == "all":
+    #         amount = bal[0]
+    #     amount = int(amount)
+    #     if amount > bal[1]:
+    #         await ctx.send("你沒這麼多錢拉幹")
+    #         return 
+    #     if amount< 0:
+    #         await ctx.send("北七喔，錢有負的喔")
+    #         return
+    #     await update_bank(ctx.author, -1 * amount, "bank")
+    #     await update_bank(member, amount, "bank")
+    #     member = str(member)
+    #     member = member.split("#")[0]
+    #     await ctx.send(f"你給了{ member } { amount } 塊錢!!!")
+
+   
+    
+
+        
+    
+        
+    
+        
 
 
 

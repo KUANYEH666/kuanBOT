@@ -5,6 +5,10 @@ import discord
 import datetime
 from discord.ext import commands
 from core.classes import Cog_Extension
+from core import check
+import json
+with open('setting.json', mode='r', encoding='utf8') as jfile:
+   jdata = json.load(jfile)
 class main(Cog_Extension):
 
     @commands.command()
@@ -46,9 +50,11 @@ class main(Cog_Extension):
         embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/915252108507365386/975376378444787774/b5931bd82ea9b701e2ab2b70025d46ca.jpg")
         embed.add_field(name="刪除指令", value=f"我刪除了{num}條訊息", inline=False)
         await ctx.send(embed=embed)
+    
+  
+
 
     
-
     
 
 

@@ -30,6 +30,8 @@ class event(Cog_Extension):
             await msg.channel.send('嗨~ 消夜吃了嗎')
         if msg.content =='我好孤單':
             await msg.channel.send('不管你需不需要，我一直都在。')
+        if msg.content =='兩個禮拜以後':
+            await msg.channel.send('速度與激情9~')
         if msg.content =='搞笑影片':
             await msg.channel.send('||https://www.youtube.com/watch?v=BjDebmqFRuc&list=LL&index=64&ab_channel=MrMeme||')
         if msg.content=='晚安':
@@ -75,6 +77,8 @@ class event(Cog_Extension):
             await msg.channel.send(' https://drive.google.com/drive/folders/1eJM_eHsSECtu6bCRC0FJfSdd4ZHvNG5V')
         if msg.content =='國文網址':
             await msg.channel.send('  https://meet.google.com/wqn-qaie-qmh')
+        
+           
        
         
 
@@ -97,7 +101,7 @@ class event(Cog_Extension):
         else:
             embed=discord.Embed(title="↓↓↓↓↓↓")
             embed.set_author(name="🛑錯誤指令🛑")
-            embed.add_field(name="請輸入正確指令", value="查詢指令k! helpp", inline=False)
+            embed.add_field(name=" 發生錯誤", value="請@阿寬處理", inline=False)
             await ctx.send(embed=embed)
 
   
