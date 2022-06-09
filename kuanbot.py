@@ -13,7 +13,7 @@ bot = commands.Bot(command_prefix='k!',intents=intents)
 @bot.event
 async def on_ready():
     print("}}機器人已上線{{")
-    game = discord.Game('阿寬的大GG')
+    game = discord.Game('主人罷工，不想更新')
     await bot.change_presence(status=discord.Status.idle, activity=game)
 
 
@@ -42,7 +42,7 @@ async def reload(ctx, extension):
 @commands.command()
 async def change(ctx,*,msg):
     await ctx.message.delete()
-    game = discord.Game(msg)
+    game = await bot.wait_for("message")
     await bot.change_presence(status=discord.Status.idle, activity=game)
 
 

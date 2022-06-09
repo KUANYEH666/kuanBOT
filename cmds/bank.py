@@ -239,7 +239,7 @@ class bank(Cog_Extension):
         await ctx.send(f'你給了{member} { amount } 塊錢!!!')
 
     # @commands.command()
-    # async def fk(self, ctx, member:discord.Member, amount = None):
+    # async def give(self, ctx, member:discord.Member, amount = None):
     #     await open_account(ctx.author)
     #     await open_account(member)
     #     if amount == None:

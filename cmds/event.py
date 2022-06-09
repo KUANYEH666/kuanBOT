@@ -77,8 +77,8 @@ class event(Cog_Extension):
             await msg.channel.send(' https://drive.google.com/drive/folders/1eJM_eHsSECtu6bCRC0FJfSdd4ZHvNG5V')
         if msg.content =='國文網址':
             await msg.channel.send('  https://meet.google.com/wqn-qaie-qmh')
-        
-           
+
+    
        
         
 
