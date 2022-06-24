@@ -143,7 +143,7 @@ class guess(Cog_Extension):
             a = 0
             b = 0
             times += 1
-            if times == 10:
+            if times > 10:
                 embed=discord.Embed(title="1A2B小遊戲")
                 embed.set_author(name="遊戲", icon_url="https://cdn.discordapp.com/attachments/915252108507365386/980642315385307156/Screenshot_2022-05-30-09-22-14-869_com.miui.mediaeditor.png")
                 embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/915252108507365386/980815897323274250/e52430e7f1d106372201c951d38c982a.gif")

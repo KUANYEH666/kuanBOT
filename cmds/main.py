@@ -60,6 +60,7 @@ class main(Cog_Extension):
         embed.add_field(name="刪除指令", value=f"我刪除了{num}條訊息", inline=False)
         await ctx.send(embed=embed)
     @commands.command()
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def 午餐(self,ctx):
         a = 1
         b = 11
@@ -86,7 +87,13 @@ class main(Cog_Extension):
             await ctx.send("牛肉麵")
         if ans == 11 :
             await ctx.send("榨菜肉絲麵")
+    @午餐.error
+    async def command_午餐_error(self,ctx,error:str):
+        if isinstance(error, commands.CommandOnCooldown):
+            cd = int(error.retry_after)
+            await ctx.send(f'冷卻: 你還有{cd}秒')
     @commands.command()
+    @commands.cooldown(1, 10, commands.BucketType.user)
     async def 晚餐(self,ctx):
         a = 1
         b = 22
@@ -134,6 +141,11 @@ class main(Cog_Extension):
             await ctx.send("鐵板麵")
         if ans == 22 :
             await ctx.send("炒飯")
+    @晚餐.error
+    async def command_晚餐_error(self,ctx,error:str):
+        if isinstance(error, commands.CommandOnCooldown):
+            cd = int(error.retry_after)
+            await ctx.send(f'冷卻: 你還有{cd}秒')
        
     @commands.command()
     async def 晚(self,ctx):
@@ -169,13 +181,12 @@ class main(Cog_Extension):
         if ans == 2:
             await ctx.send("╒═══════════════════════╕\n│ COVID-19          C         T                            │\n│                       ┌──────┐      ┌─┐        │\n│                      ▕     ❗        ▕       │    │       │\n│                       └──────┘       └─┘       │\n╘═══════════════════════╛")
                             
-                
+        
                             
   
 
 
-    
-    
+
 
 
      

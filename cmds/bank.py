@@ -76,6 +76,15 @@ class bank(Cog_Extension):
         await ctx.send(embed=embed)
 
     @commands.command()
+    async def 頭像(self,ctx,):
+        user = ctx.author
+        
+        embed=discord.Embed(title="名字", description=f"{ctx.author.name}" ,color=0x832020)
+        embed.set_thumbnail(url = user.avatar_url)
+        embed.set_author(name="頭像")
+        await ctx.send(embed=embed) 
+
+    @commands.command()
     async def market(self, ctx):
         pass
         embed=discord.Embed(title="以下為貨品", color=0xab6bd6)
@@ -236,7 +245,7 @@ class bank(Cog_Extension):
         await update_bank(member, amount, "bank")
         member = str(member)
         member = member.split("#")[0]
-        await ctx.send(f'你給了{member} { amount } 塊錢!!!')
+        await ctx.send(f'```你給了{member} {amount} 塊錢!!!```')
 
     # @commands.command()
     # async def give(self, ctx, member:discord.Member, amount = None):

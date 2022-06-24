@@ -3,6 +3,9 @@ import discord
 from discord.ext import commands
 import json
 import os
+import random
+import datetime
+import asyncio
 with open('setting.json', mode='r', encoding='utf8') as jfile:
    jdata = json.load(jfile)
 
@@ -10,12 +13,26 @@ intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='k!',intents=intents)
 
+
 @bot.event
 async def on_ready():
-    print("}}機器人已上線{{")
-    game = discord.Game('主人罷工，不想更新')
-    await bot.change_presence(status=discord.Status.idle, activity=game)
+    await bot.change_presence(status = discord.Status.idle,activity = discord.Game(name = "啟動中"))
+    await bot.change_presence(status = discord.Status.online,activity = discord.Game(name = ">>機器人啟動完成<<"))
+    print(">>機器人啟動完成<<")
+async def ch_pr():
+    await bot.wait_until_ready()
+    bot.reload_extension('cmds.event')
+    statuses = [f" 加入了{len(bot.guilds)}伺服器" , "查指令 ‖ k!helpp", "加入我的DC ==>https://discord.gg/sAVz7bjynC"]
 
+    while not bot.is_closed():
+
+        status = random.choice(statuses)
+
+        await bot.change_presence(status = discord.Status.dnd,activity = discord.Game(name = status))
+
+        await asyncio.sleep(5)
+
+bot.loop.create_task(ch_pr())
 
 @bot.command()
 async def load(ctx, extension):
