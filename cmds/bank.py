@@ -245,7 +245,12 @@ class bank(Cog_Extension):
         await update_bank(member, amount, "bank")
         member = str(member)
         member = member.split("#")[0]
-        await ctx.send(f'```你給了{member} {amount} 塊錢!!!```')
+        embed=discord.Embed(title="你轉帳了")
+        embed.set_author(name="轉帳", icon_url="https://media.discordapp.net/attachments/915252108507365386/989357297295818832/1655951544232.jpg?width=420&height=671")
+        embed.add_field(name="名字", value=f'==>{member}', inline=False)
+        embed.add_field(name="錢", value=f'==>{amount}', inline=True)
+        await ctx.send(embed=embed)
+        
 
     # @commands.command()
     # async def give(self, ctx, member:discord.Member, amount = None):
