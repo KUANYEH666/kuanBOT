@@ -95,52 +95,60 @@ class main(Cog_Extension):
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def 晚餐(self,ctx):
+    
+      
         a = 1
         b = 22
         ans = random.randint(a,b)
-        if ans == 1 :
-            await ctx.send("滷肉飯")
-        if ans == 2 :
-            await ctx.send("咖哩飯")
-        if ans == 3 :
-            await ctx.send("牛丼")
-        if ans == 4 :
-            await ctx.send("買當勞")
-        if ans == 5 :
-            await ctx.send("ㄔㄐㄐ")
-        if ans == 6 :
-            await ctx.send("bang當")
-        if ans == 7 :
-            await ctx.send("7-11")
-        if ans == 8 :
-            await ctx.send("滷味")
-        if ans == 9 :
-            await ctx.send("珍奶配雞排")
-        if ans == 10 :
-            await ctx.send("牛肉麵")
-        if ans == 11 :
-            await ctx.send("榨菜肉絲麵")
-        if ans == 12 :
-            await ctx.send(f'甲賽')
-            await ctx.send(":wc:  ")
-        if ans == 13 :
-            await ctx.send("感丼")
-        if ans == 14 :
-            await ctx.send("飯捲")
-        if ans == 16 :
-            await ctx.send("餛飩麵")
-        if ans == 17 :
-            await ctx.send("拉麵")
-        if ans == 18 :
-            await ctx.send("火鍋")
-        if ans == 19 :
-            await ctx.send("壽司")
-        if ans == 20 :
-            await ctx.send("肯雞雞")
-        if ans == 21 :
-            await ctx.send("鐵板麵")
-        if ans == 22 :
-            await ctx.send("炒飯")
+        for i in range(10):
+            
+            if ans == 1 :
+                await ctx.send("滷肉飯")
+            if ans == 2 :
+                await ctx.send("咖哩飯")
+            if ans == 3 :
+                await ctx.send("牛丼")
+            if ans == 4 :
+                await ctx.send("買當勞")
+            if ans == 5 :
+                await ctx.send("ㄔㄐㄐ")
+            if ans == 6 :
+                await ctx.send("bang當")
+            if ans == 7 :
+                await ctx.send("7-11")
+            if ans == 8 :
+                await ctx.send("滷味")
+            if ans == 9 :
+                await ctx.send("珍奶配雞排")
+            if ans == 10 :
+                await ctx.send("牛肉麵")
+            if ans == 11 :
+                await ctx.send("榨菜肉絲麵")
+            if ans == 12 :
+                await ctx.send(f'甲賽')
+                await ctx.send(":wc:  ")
+            if ans == 13 :
+                await ctx.send("感丼")
+            if ans == 14 :
+                await ctx.send("飯捲")
+            if ans == 16 :
+                await ctx.send("餛飩麵")
+            if ans == 17 :
+                await ctx.send("拉麵")
+            if ans == 18 :
+                await ctx.send("火鍋")
+            if ans == 19 :
+                await ctx.send("壽司")
+            if ans == 20 :
+                await ctx.send("肯雞雞")
+            if ans == 21 :
+                await ctx.send("鐵板麵")
+            if ans == 22 :
+                await ctx.send("炒飯")
+   
+
+
+
     @晚餐.error
     async def command_晚餐_error(self,ctx,error:str):
         if isinstance(error, commands.CommandOnCooldown):
