@@ -109,14 +109,7 @@ class guess(Cog_Extension):
         b = 0
         times = 1
         while 1 == 1:
-            # try:
-            #     i[int:Num]
-    
-            # except:
-            #     embed=discord.Embed(title="🤔 ‖ 請輸入數字", color=0xff0000, timestamp = datetime.datetime.now())
-            #     embed.set_author(name="🕹️ 娛樂中心 🕹️")
-            #     embed.set_thumbnail(url="https://cdn.dribbble.com/users/648258/screenshots/9070602/media/20cef9101ef2a1f1617b6b020ec97157.gif")
-            #     await ctx.send(ctx.author.mention,embed=embed)
+
             for i in range(4):
                 for j in range(4):
                     if ans[i] == ab[j] and i == j:
