@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from core.classes import Cog_Extension
 import json
-
+import datetime
 with open('setting.json', mode='r', encoding='utf8') as jfile:
    jdata = json.load(jfile)
 
@@ -106,7 +106,31 @@ class event(Cog_Extension):
 
   
 
-        
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self,reaction,user):
+        print(reaction)
+    @commands.Cog.listener()
+    async def on_raw_reaction_add(self, payload):
+        if payload.message_id ==993335821723779123:
+            if str(payload.emoji) == '<:emoji_55:984607094198132757>':
+                guild = self.bot.get_guild(payload.guild_id)
+                role = guild.get_role(993163539030220900)
+                await payload.member.add_roles(role)
+                embed=discord.Embed(title=f"已新增 {role} 身分組",color=0x4dff00, timestamp = datetime.datetime.now())
+                embed.set_author(name="身分組領取通知")
+                await payload.member.send(embed = embed)
+
+    @commands.Cog.listener()
+    async def on_raw_reaction_remove(self, payload):
+        if payload.message_id ==993335821723779123:
+            if str(payload.emoji) == '<:emoji_55:984607094198132757>':
+                guild = self.bot.get_guild(payload.guild_id)
+                user = guild.get_member(payload.user_id)
+                role = guild.get_role(993163539030220900)
+                await user.remove_roles(role)
+                embed=discord.Embed(title=f"已移除 {role} 身分組",color=0xf40101, timestamp = datetime.datetime.now())
+                embed.set_author(name="身分組移除通知")
+                await user.send(embed = embed)    
         
 def setup(bot):
     bot.add_cog(event(bot)) 

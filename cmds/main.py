@@ -193,11 +193,16 @@ class main(Cog_Extension):
                             
   
 
-
-
-
-
-     
+    @commands.command()
+    async def avatar(self, ctx, user : discord.Member):
+        embed = discord.Embed(
+            title = f"{user.name} 的頭像",
+            color = user.color,
+            timestamp = datetime.datetime.now()
+        )
+        embed.set_image(url = user.avatar)
+        await ctx.reply(mention_author = False, embed = embed)
+        
 
 
 def setup(bot):
